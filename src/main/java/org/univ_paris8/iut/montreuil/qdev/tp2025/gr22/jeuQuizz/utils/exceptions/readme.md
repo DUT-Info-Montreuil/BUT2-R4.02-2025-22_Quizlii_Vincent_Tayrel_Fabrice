@@ -1,0 +1,1 @@
+Ce dossier sert à gérer les exceptions

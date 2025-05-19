@@ -1,0 +1,1 @@
+Ensemble de type qui sert à être réutiliser dans le projet
