@@ -18,5 +18,5 @@ public interface QuestionnaireServices {
      * @throws QuestionnaireException si un problème lié au questionnaire survient (non trouvé, corrompu, etc.)
      * @throws IOException si une erreur de lecture/écriture survient
      */
-    List<QuestionnaireDTO> fournirListeQuestionnaire() throws QuestionnaireException, IOException;
+    List<QuestionnaireDTO> fournirListeQuestionnaire(String url_fichier_a_charger) throws QuestionnaireException, IOException;
 }
