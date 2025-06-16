@@ -8,33 +8,32 @@ import java.util.Objects;
  */
 public class QuestionnaireDTO {
 
-    private String idQuestionnaire;
-    private String libelleQuestionnaire;
+    private int idQuestionnaire;
+    private String theme;
     private String langue;
     private List<QuestionDTO> questions;
-    public QuestionnaireDTO() {}
 
-    public QuestionnaireDTO(String idQuestionnaire, String libelleQuestionnaire, String langue, List<QuestionDTO> questions) {
+    public QuestionnaireDTO(int idQuestionnaire, String libelleQuestionnaire, String langue, List<QuestionDTO> questions) {
         this.idQuestionnaire = idQuestionnaire;
-        this.libelleQuestionnaire = libelleQuestionnaire;
+        this.theme = libelleQuestionnaire;
         this.langue = langue;
         this.questions = questions;
     }
 
-    public String getIdQuestionnaire() {
+    public int getIdQuestionnaire() {
         return idQuestionnaire;
     }
 
-    public void setIdQuestionnaire(String idQuestionnaire) {
+    public void setIdQuestionnaire(int idQuestionnaire) {
         this.idQuestionnaire = idQuestionnaire;
     }
 
-    public String getLibelleQuestionnaire() {
-        return libelleQuestionnaire;
+    public String getTheme() {
+        return theme;
     }
 
-    public void setLibelleQuestionnaire(String libelleQuestionnaire) {
-        this.libelleQuestionnaire = libelleQuestionnaire;
+    public void setTheme(String theme) {
+        this.theme = theme;
     }
 
     public String getLangue() {
@@ -57,7 +56,7 @@ public class QuestionnaireDTO {
     public String toString() {
         return "QuestionnaireDto{" +
                 "idQuestionnaire='" + idQuestionnaire + '\'' +
-                ", libelleQuestionnaire='" + libelleQuestionnaire + '\'' +
+                ", theme='" + theme + '\'' +
                 ", langue='" + langue + '\'' +
                 ", questions=" + questions +
                 '}';
@@ -69,13 +68,13 @@ public class QuestionnaireDTO {
         if (!(o instanceof QuestionnaireDTO)) return false;
         QuestionnaireDTO that = (QuestionnaireDTO) o;
         return Objects.equals(idQuestionnaire, that.idQuestionnaire) &&
-                Objects.equals(libelleQuestionnaire, that.libelleQuestionnaire) &&
+                Objects.equals(theme, that.theme) &&
                 Objects.equals(langue, that.langue) &&
                 Objects.equals(questions, that.questions);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(idQuestionnaire, libelleQuestionnaire, langue, questions);
+        return Objects.hash(idQuestionnaire, theme, langue, questions);
     }
 }

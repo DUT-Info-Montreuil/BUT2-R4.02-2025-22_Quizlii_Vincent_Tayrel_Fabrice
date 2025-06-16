@@ -3,45 +3,32 @@ package org.univ_paris8.iut.montreuil.qdev.tp2025.gr22.jeuQuizz.entities.dto;
 /**
  * Représente une question d’un questionnaire.
  */
-public class QuestionDTO {
 
-    private int numero;
-    private String libelle;
-    private String reponse;
+public class QuestionDTO {
+    private String question;
+    private String bonneReponse;
     private int difficulte;
 
-
-    public QuestionDTO() {}
-
-    public QuestionDTO(int numero, String libelle, String reponse, int difficulte, String explication, String reference) {
-        this.numero = numero;
-        this.libelle = libelle;
-        this.reponse = reponse;
+    public QuestionDTO(String question, String bonneReponse, int difficulte) {
+        this.question = question;
+        this.bonneReponse = bonneReponse;
         this.difficulte = difficulte;
     }
 
-    public int getNumero() {
-        return numero;
+    public String getQuestion() {
+        return question;
     }
 
-    public void setNumero(int numero) {
-        this.numero = numero;
+    public void setQuestion(String question) {
+        this.question = question;
     }
 
-    public String getLibelle() {
-        return libelle;
+    public String getBonneReponse() {
+        return bonneReponse;
     }
 
-    public void setLibelle(String libelle) {
-        this.libelle = libelle;
-    }
-
-    public String getReponse() {
-        return reponse;
-    }
-
-    public void setReponse(String reponse) {
-        this.reponse = reponse;
+    public void setBonneReponse(String bonneReponse) {
+        this.bonneReponse = bonneReponse;
     }
 
     public int getDifficulte() {
@@ -52,14 +39,10 @@ public class QuestionDTO {
         this.difficulte = difficulte;
     }
 
-
-
     @Override
     public String toString() {
-        return "QuestionDto{" +
-                "numero=" + numero +
-                ", libelle='" + libelle + '\'' +
-                ", reponse='" + reponse + '\'' +
+        return "QuestionDTO{" +
+                "question='" + question + '\'' +
                 ", difficulte=" + difficulte +
                 '}';
     }
