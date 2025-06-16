@@ -1,6 +1,8 @@
 package org.univ_paris8.iut.montreuil.qdev.tp2025.gr22.jeuQuizz.services.impls;
 
+import com.opencsv.CSVParserBuilder;
 import com.opencsv.CSVReader;
+import com.opencsv.CSVReaderBuilder;
 import com.opencsv.exceptions.CsvException;
 import org.univ_paris8.iut.montreuil.qdev.tp2025.gr22.jeuQuizz.entities.bo.FichierCsvBO;
 import org.univ_paris8.iut.montreuil.qdev.tp2025.gr22.jeuQuizz.entities.dto.QuestionnaireDTO;
@@ -21,13 +23,11 @@ public class QuestionnaireImpls implements QuestionnaireServices {
         }
 
         if (!path.endsWith(".csv")) {
-            // Utilisation de la classe interne statique
             throw new FichierNonCsvException(path);
         }
 
         File fichier = new File(path);
         if (!fichier.exists()) {
-            // Utilisation de la classe interne statique
             throw new FichierInexistantException(path);
         }
 
@@ -37,29 +37,33 @@ public class QuestionnaireImpls implements QuestionnaireServices {
 
         List<List<String>> contenu;
 
-        try (CSVReader csvReader = new CSVReader(new FileReader(fichier))) {
+        try (FileReader fileReader = new FileReader(fichier);
+             // Configuration du CSVReader avec point-virgule comme séparateur
+             CSVReader csvReader = new CSVReaderBuilder(fileReader)
+                     .withCSVParser(new CSVParserBuilder().withSeparator(';').build())
+                     .build()) {
+
+
             List<String[]> lignes = csvReader.readAll();
             contenu = new ArrayList<>();
 
+            if (lignes.isEmpty()) {
+                throw new FichierVideException();
+            }
+
             for (String[] valeurs : lignes) {
                 if (valeurs.length != 12) {
-                    // Utilisation de la classe interne statique
                     throw new ColonneManquanteException(12, valeurs.length, String.join(";", valeurs));
                 }
 
+                // Vérification des valeurs vides AVANT d'ajouter à la liste
                 for (String val : valeurs) {
                     if (val == null || val.trim().isEmpty()) {
-                        // Utilisation de la classe interne statique
                         throw new ValeurVideException(String.join(";", valeurs));
                     }
                 }
 
                 contenu.add(Arrays.asList(valeurs));
-            }
-
-            if (contenu.isEmpty()) {
-                // Utilisation de la classe interne statique
-                throw new FichierVideException();
             }
 
         } catch (IOException | CsvException e) {
@@ -85,7 +89,6 @@ public class QuestionnaireImpls implements QuestionnaireServices {
         try {
             return FichierCsvBoToQuestionnaireDTOMapper.map(fichier);
         } catch (Exception e) {
-            // Utilisation de la classe interne statique
             throw new MappingException("Erreur lors du mapping du fichier", e);
         }
     }
