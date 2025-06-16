@@ -13,11 +13,16 @@ public class QuestionnaireDTO {
     private String langue;
     private List<QuestionDTO> questions;
 
-    public QuestionnaireDTO(int idQuestionnaire, String libelleQuestionnaire, String langue, List<QuestionDTO> questions) {
+    // Constructeur avec tous les paramètres
+    public QuestionnaireDTO(int idQuestionnaire, String theme, String langue, List<QuestionDTO> questions) {
         this.idQuestionnaire = idQuestionnaire;
-        this.theme = libelleQuestionnaire;
+        this.theme = theme;
         this.langue = langue;
         this.questions = questions;
+    }
+
+    // Constructeur par défaut (nécessaire pour les tests et la sérialisation)
+    public QuestionnaireDTO() {
     }
 
     public int getIdQuestionnaire() {
@@ -54,8 +59,8 @@ public class QuestionnaireDTO {
 
     @Override
     public String toString() {
-        return "QuestionnaireDto{" +
-                "idQuestionnaire='" + idQuestionnaire + '\'' +
+        return "QuestionnaireDTO{" +
+                "idQuestionnaire=" + idQuestionnaire +
                 ", theme='" + theme + '\'' +
                 ", langue='" + langue + '\'' +
                 ", questions=" + questions +
@@ -67,7 +72,7 @@ public class QuestionnaireDTO {
         if (this == o) return true;
         if (!(o instanceof QuestionnaireDTO)) return false;
         QuestionnaireDTO that = (QuestionnaireDTO) o;
-        return Objects.equals(idQuestionnaire, that.idQuestionnaire) &&
+        return idQuestionnaire == that.idQuestionnaire &&
                 Objects.equals(theme, that.theme) &&
                 Objects.equals(langue, that.langue) &&
                 Objects.equals(questions, that.questions);
